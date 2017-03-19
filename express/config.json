@@ -1,0 +1,14 @@
+{
+    // Database connection
+    "DB_USERNAME": "root",
+    "DB_PASSWORD": "root",
+    "DB_HOST": "localhost:27017",
+
+    // Parse Server
+    "MASTER_KEY": "123456",
+    "APP_IDS": ["demo", "guiatv"],
+
+    // Dashboard
+    "DASHBOARD_USERNAME": "root",
+    "DASHBOARD_PASSWORD": "root"
+}

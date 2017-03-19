@@ -1,0 +1,13 @@
+{
+  "name": "parse-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "express": "*",
+    "parse-server": "*",
+    "parse-dashboard": "*"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}

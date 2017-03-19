@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+  parse:
+    image: vegidio/parse
+    links:
+      - mongo:mongo
+    ports:
+      - 1337:1337
+    volumes:
+      - ./express/config.json:/usr/local/parse/config.json
+
+  mongo:
+    image: vegidio/mongodb
+    ports:
+      - 27017:27017
