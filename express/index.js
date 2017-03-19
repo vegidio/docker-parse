@@ -3,42 +3,37 @@ let ParseServer = require('parse-server').ParseServer;
 let ParseDashboard = require('parse-dashboard');
 let func = require("./functions");
 
-// Loading config file
-let fs = require('fs');
-let config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
-
 let app = express();
-let parseArray = process.env.APP_ID || config.APP_IDS;
+let parseArray = process.env.APP_IDS.split(',');
 let dashboardArray = [];
 
 // Parse Server
-parseArray = [].concat(parseArray);
 parseArray.forEach(appId =>
 {
     dashboardArray.push({
-        'serverURL': 'http://localhost:1337/api/' + appId,
-        'masterKey': process.env.MASTER_KEY || config.MASTER_KEY,
+        'serverURL': 'http://localhost:1337/app/' + appId,
+        'masterKey': process.env.MASTER_KEY,
         'appId': appId,
         'appName': appId
     });
 
-    let api = new ParseServer({
+    let parseApp = new ParseServer({
         serverURL: 'http://localhost:1337',
-        masterKey: process.env.MASTER_KEY || config.MASTER_KEY,
-        appId: process.env.APP_ID || appId,
-        databaseURI: func.buildConnectionUrl(process.env, config, appId)
+        masterKey: process.env.MASTER_KEY,
+        appId: appId,
+        databaseURI: func.buildConnectionUrl(process.env, appId)
     });
 
-    // Serve the Parse API on the /api URL prefix
-    app.use('/api/' + appId, api);
+    // Serve the Parse apps on the /app URL prefix
+    app.use('/app/' + appId, parseApp);
 });
 
 // Parse Dashboard
 let dashboard = new ParseDashboard({
     'apps': dashboardArray,
     'users': [{
-        'user': process.env.DASHBOARD_USERNAME || config.DASHBOARD_USERNAME,
-        'pass': process.env.DASHBOARD_PASSWORD || config.DASHBOARD_PASSWORD
+        'user': process.env.DASHBOARD_USERNAME,
+        'pass': process.env.DASHBOARD_PASSWORD
     }]
 }, true);
 

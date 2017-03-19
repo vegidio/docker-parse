@@ -3,12 +3,16 @@ version: '2'
 services:
   parse:
     image: vegidio/parse
+    environment:
+      - DB_HOST=mongo:27017
+      - MASTER_KEY=123456
+      - APP_IDS=app1,app2
+      - DASHBOARD_USERNAME=admin
+      - DASHBOARD_PASSWORD=password
     links:
       - mongo:mongo
     ports:
       - 1337:1337
-    volumes:
-      - ./express/config.json:/usr/local/parse/config.json
 
   mongo:
     image: mongo
