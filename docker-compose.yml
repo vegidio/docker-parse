@@ -11,6 +11,6 @@ services:
       - ./express/config.json:/usr/local/parse/config.json
 
   mongo:
-    image: vegidio/mongodb
+    image: mongo
     ports:
       - 27017:27017

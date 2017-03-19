@@ -1,39 +1,45 @@
-var express = require('express');
-var ParseServer = require('parse-server').ParseServer;
-var ParseDashboard = require('parse-dashboard');
+let express = require('express');
+let ParseServer = require('parse-server').ParseServer;
+let ParseDashboard = require('parse-dashboard');
+let func = require("./functions");
 
 // Loading config file
-var fs = require('fs');
-var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+let fs = require('fs');
+let config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
 
-var app = express();
-var parseArray = process.env.APP_ID || config.APP_IDS;
-var dashboardArray = [];
+let app = express();
+let parseArray = process.env.APP_ID || config.APP_IDS;
+let dashboardArray = [];
 
 // Parse Server
-parseArray.forEach(appId => {
+parseArray = [].concat(parseArray);
+parseArray.forEach(appId =>
+{
     dashboardArray.push({
         'serverURL': 'http://localhost:1337/api/' + appId,
-        'masterKey': MASTER_KEY,
+        'masterKey': process.env.MASTER_KEY || config.MASTER_KEY,
         'appId': appId,
         'appName': appId
     });
 
-    var api = new ParseServer({
+    let api = new ParseServer({
         serverURL: 'http://localhost:1337',
         masterKey: process.env.MASTER_KEY || config.MASTER_KEY,
         appId: process.env.APP_ID || appId,
-        databaseURI: process.env.DB_HOST || 'mongodb://' + config.DB_USERNAME + ':' + config.DB_PASSWORD + '@' +
-            config.DB_HOST + '/' + appId + '?authSource=admin',
+        databaseURI: func.buildConnectionUrl(process.env, config, appId)
     });
 
-    // Serve the Parse API on the /parse URL prefix
+    // Serve the Parse API on the /api URL prefix
     app.use('/api/' + appId, api);
 });
 
 // Parse Dashboard
-var dashboard = new ParseDashboard({
-    'apps': dashboardArray
+let dashboard = new ParseDashboard({
+    'apps': dashboardArray,
+    'users': [{
+        'user': process.env.DASHBOARD_USERNAME || config.DASHBOARD_USERNAME,
+        'pass': process.env.DASHBOARD_PASSWORD || config.DASHBOARD_PASSWORD
+    }]
 }, true);
 
 app.use('/dashboard/', dashboard);
@@ -41,5 +47,5 @@ app.use('/dashboard/', dashboard);
 // Parse Server plays nicely with the rest of your web routes
 app.get('/', (req, res) => res.status(200).send('Welcome to Parse Server'));
 
-var port = process.env.PORT || 1337;
+let port = process.env.PORT || 1337;
 app.listen(port, () => console.log('Parse Server is running on port ' + port + '.'));
