@@ -11,7 +11,7 @@ let dashboardArray = [];
 parseArray.forEach(appId =>
 {
     dashboardArray.push({
-        'serverURL': 'http://localhost:1337/app/' + appId,
+        'serverURL': process.env.SERVER_URL + '/app/' + appId,
         'masterKey': process.env.MASTER_KEY,
         'appId': appId,
         'appName': appId
