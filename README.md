@@ -16,14 +16,14 @@ Run the container using the image **vegidio/parse**:
 
 ```
 $ docker run -d \
-    -e DB_USERNAME='root' \
-    -e DB_PASSWORD='root' \
-    -e DB_HOST='hostname:27017' \
-    -e SERVER_URL='http://hostname:1337' \
-    -e MASTER_KEY='d2d58468' \
-    -e APP_IDS='app1' \
-    -e DASHBOARD_USERNAME='username' \
-    -e DASHBOARD_PASSWORD='password' \
+    -e DB_USERNAME=root \
+    -e DB_PASSWORD=root \
+    -e DB_HOST=hostname:27017 \
+    -e SERVER_URL=http://hostname:1337 \
+    -e MASTER_KEY=d2d58468 \
+    -e APP_IDS=app1 \
+    -e DASHBOARD_USERNAME=username \
+    -e DASHBOARD_PASSWORD=password \
     -p 1337:1337 \
     --name parse vegidio/parse
 ```
@@ -34,7 +34,7 @@ The full list of environment variables and how they can be used to configure you
 
 If you want to run more than one application in the same instance then you just need to add them in the environment variable `APP_IDS`, in a single string separated by comma `,`.
 
-For example, the environment variable `-e APP_ID='app1,app2,app3'` will create 3 apps called `app1`, `app2` and `app3`.
+For example, the environment variable `-e APP_ID=app1,app2,app3` will create 3 apps called `app1`, `app2` and `app3`.
 
 ### URLs
 

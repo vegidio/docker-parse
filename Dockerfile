@@ -1,5 +1,5 @@
 FROM node
-MAINTAINER Vinicius Egidio <vegidio@gmail.com>
+MAINTAINER Vinicius Egidio <me@vinicius.io>
 
 ADD express /usr/local/parse
 WORKDIR /usr/local/parse
