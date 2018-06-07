@@ -16,9 +16,9 @@ before_script:
 
 script:
   - ./test.sh
+  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
 after_success:
-  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   - docker push vegidio/parse
 
 branches:
