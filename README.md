@@ -38,8 +38,8 @@ For example, the environment variable `-e APP_ID=app1,app2,app3` will create 3 a
 
 ### URLs
 
-- **Apps:** each app in the Parse Server can be accessed through the URL [hostname:1337/app/`app_id`]().
-- **Dashboard:** The Parse Dashboard can be accessed through the URL [hostname:1337/dashboard]().
+* __Apps:__ each app in the Parse Server can be accessed through the URL [hostname:1337/app/`app_id`]().
+* __Dashboard:__ The Parse Dashboard can be accessed through the URL [hostname:1337/dashboard]().
 
 ## Parameters
 
