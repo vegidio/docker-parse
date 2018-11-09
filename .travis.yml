@@ -12,10 +12,10 @@ before_install:
 
 before_script:
   - sleep 10
-  - chmod +x test.sh
+  - yarn --cwd $TRAVIS_BUILD_DIR/test
 
 script:
-  - ./test.sh
+  - yarn --cwd $TRAVIS_BUILD_DIR/test test
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
 after_success:

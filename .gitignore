@@ -105,6 +105,7 @@ typings/
 
 # Optional npm cache directory
 .npm
+yarn.lock
 
 # Optional eslint cache
 .eslintcache
