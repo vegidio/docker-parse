@@ -3,6 +3,6 @@ MAINTAINER Vinicius Egidio <me@vinicius.io>
 
 ADD express /usr/local/parse
 WORKDIR /usr/local/parse
-RUN npm install
+RUN yarn
 
-CMD npm start
+CMD yarn start
