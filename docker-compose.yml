@@ -10,8 +10,6 @@ services:
       - SERVER_URL=http://localhost:1337
       - DASHBOARD_USERNAME=admin
       - DASHBOARD_PASSWORD=password
-    links:
-      - mongo:mongo
     ports:
       - 1337:1337
 
