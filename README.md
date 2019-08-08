@@ -22,6 +22,7 @@ $ docker run -d \
     -e SERVER_URL=http://hostname:1337 \
     -e MASTER_KEY=d2d58468 \
     -e APP_IDS=app1 \
+    -e LIVE_QUERIES=app1:Movie,Actor|app2:Post
     -e DASHBOARD_USERNAME=username \
     -e DASHBOARD_PASSWORD=password \
     -p 1337:1337 \
@@ -36,9 +37,26 @@ If you want to run more than one application in the same instance then you just 
 
 For example, the environment variable `-e APP_ID=app1,app2,app3` will create 3 apps called `app1`, `app2` and `app3`.
 
+### Live Query
+
+To enable **Live Queries** you must specify during the initialization of your Parse Server exactly what applications and classes should have this feature enabled. To do that, add the environment variable `LIVE_QUERY` with a content with this format:
+
+```
+<appId1>:<ClassA>,<ClassB>|<appId2>:<ClassC>,<ClassD>
+```
+
+where:
+
+- `<appId>`: is the unique ID of your parse application, followed by the colon sign (`:`).
+- `<Class>`: is the name of the class where Live Query should be enabled. If you want to enable Live Queries in more than one class then each class must be separated by a comma (`,`).
+- Each application and its classes must be separated by a pipe sign (`|`).
+
+For example, the environment variable `-e LIVE_QUERIES=app1:Movie,Actor|app2:Post` will enable Live Queries in the classes `Movie` and `Actor` that belong to `app1`; and it will also enable Live Queries in the class `Post` that belong to `app2`.
+
 ### URLs
 
 * __Apps:__ each app in the Parse Server can be accessed through the URL [hostname:1337/app/`app_id`]().
+* __GraphQL:__ each app can also be accessed through GraphQL with the URL [hostname:1337/app/`app_id`/graphql]().
 * __Dashboard:__ The Parse Dashboard can be accessed through the URL [hostname:1337/dashboard]().
 
 ## Parameters

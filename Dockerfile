@@ -1,8 +1,14 @@
 FROM node:alpine
-MAINTAINER Vinicius Egidio <me@vinicius.io>
+LABEL maintainer="Vinicius Egidio <me@vinicius.io>"
+
+# Installing build dependencies
+RUN apk --no-cache --virtual .build-deps add python build-base
 
 ADD express /usr/local/parse
 WORKDIR /usr/local/parse
 RUN yarn
+
+# Removing build dependencies
+RUN apk del .build-deps
 
 CMD yarn start
