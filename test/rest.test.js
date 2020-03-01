@@ -15,8 +15,7 @@ beforeAll(() => {
 
 describe('Test the REST API', () =>
 {
-    test('Create Parse object', () =>
-    {
+    test('Create Parse object', () => {
         let body = {
             'name': 'Indiana Jones',
             'releaseDate': new Date(Date.UTC(1981, 5, 12)),
@@ -31,8 +30,7 @@ describe('Test the REST API', () =>
             });
     });
 
-    test('Query Parse object', () =>
-    {
+    test('Query Parse object', () => {
         return client.get('classes/Movie')
             .then((res) => {
                 let obj = res.data.results[0];

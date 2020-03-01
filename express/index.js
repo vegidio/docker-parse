@@ -58,7 +58,7 @@ let dashboard = new ParseDashboard({
 app.use('/dashboard/', dashboard);
 
 // Parse Server plays nicely with the rest of your web routes
-app.get('/', (req, res) => res.status(200).send('Welcome to Parse Server'));
+app.get('/', (req, res) => res.status(200).send('Welcome to the Parse Server'));
 
 let port = process.env.PORT || 1337;
 app.listen(port, () => console.log(`Parse Server is running on port ${port}.`));

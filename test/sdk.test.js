@@ -9,8 +9,7 @@ beforeAll(() => {
 
 describe('Test the Parse SDK', () =>
 {
-    test('Create Parse object', () =>
-    {
+    test('Create Parse object', () => {
         let Movie = Parse.Object.extend('Movie');
 
         let movie = new Movie();
@@ -26,8 +25,7 @@ describe('Test the Parse SDK', () =>
             });
     });
 
-    test('Query Parse object', () =>
-    {
+    test('Query Parse object', () => {
         let Movie = Parse.Object.extend('Movie');
 
         let query = new Parse.Query(Movie);

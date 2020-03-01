@@ -1,0 +1,40 @@
+name: build
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '0 0 1 * *'
+
+env:
+  IMAGE_NAME: vegidio/parse
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Build and run the Docker image
+        run: |
+          docker build -t $IMAGE_NAME .
+          docker-compose up -d
+
+      - name: Test the build
+        run: |
+          sleep 10
+          yarn --cwd $GITHUB_WORKSPACE/test
+          yarn --cwd $GITHUB_WORKSPACE/test test
+
+      - name: Push new image into the registry
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin 
+          docker push $IMAGE_NAME
