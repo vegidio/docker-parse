@@ -18,8 +18,8 @@ Run the container using the image **vegidio/parse**:
 $ docker run -d \
     -e DB_USERNAME=root \
     -e DB_PASSWORD=root \
-    -e DB_HOST=hostname:27017 \
-    -e SERVER_URL=http://hostname:1337 \
+    -e DB_HOST=mongodb://database_host:27017 \
+    -e SERVER_URL=http://server_host:1337 \
     -e MASTER_KEY=d2d58468 \
     -e APP_IDS=app1 \
     -e LIVE_QUERIES='app1:Movie,Actor|app2:Post' \
@@ -73,7 +73,7 @@ If your database requires authentication then you need to set the parameters bel
 
 ### Mandatory
 
-- `DB_HOST`: the hostname and port where the database is hosted. You **don't** have to include the protocol `mongodb://` or the user credentials here.
+- `DB_HOST`: the hostname and port where the database is hosted. You **must** include here the protocol `mongodb://` or `postgres://`, according to the database that you are using.
 - `SERVER_URL`: the remote URL to access your Parse Server. You **must** include the protocol (`http://` or `https://`) here and the port, if needed.
 - `MASTER_KEY`: the key used to grant access to the users that want to access the Parse API.
 - `APP_IDS`: one ore more unique IDs, separated by comma `,` to identify your apps. These IDs will also be used to form the URLs of your Parse apps.

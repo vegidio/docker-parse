@@ -2,15 +2,17 @@ module.exports =
 {
     buildConnectionUrl: (env, appId) =>
     {
-        let url = 'mongodb://';
+        let url = env.DB_HOST;
 
         // Add username & password
-        if(typeof env.DB_USERNAME !== 'undefined' && typeof env.DB_PASSWORD !== 'undefined') {
-            url += env.DB_USERNAME + ':' + env.DB_PASSWORD + '@';
+        if (typeof env.DB_USERNAME !== 'undefined' && typeof env.DB_PASSWORD !== 'undefined') {
+            let creds = env.DB_USERNAME + ':' + env.DB_PASSWORD + '@';
+            let pos = url.indexOf('://') + 3;
+            url = url.substring(0, pos) + creds + url.substring(pos);
         }
 
-        // Add the host and database
-        url += env.DB_HOST + '/parse_' + appId + '?authSource=admin';
+        url += '/parse_' + appId;
+        if (url.startsWith('mongodb://')) url += '?authSource=admin';
 
         return url;
     }
