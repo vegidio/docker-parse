@@ -3,9 +3,12 @@
     "version": "1.0.0",
     "license": "Apache-2.0",
     "main": "index.js",
+    "jest": {
+        "testEnvironment": "node"
+    },
     "dependencies": {
-        "parse": "latest",
-        "axios": "latest"
+        "axios": "latest",
+        "parse": "latest"
     },
     "devDependencies": {
         "jest": "latest"
