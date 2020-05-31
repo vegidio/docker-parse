@@ -1,12 +1,12 @@
-const express = require('express');
-const { default: ParseServer, ParseGraphQLServer } = require('parse-server');
-const ParseDashboard = require('parse-dashboard');
-const db = require("./database");
+import * as express from 'express';
+import ParseServer, { ParseGraphQLServer } from 'parse-server';
+import * as ParseDashboard from 'parse-dashboard';
+import db from './database';
 
-let app = express();
-let parseArray = process.env.APP_IDS.split(',');
-let liveQueryArray = process.env.LIVE_QUERIES.split('|');
-let dashboardArray = [];
+const app = express();
+const parseArray = process.env.APP_IDS ? process.env.APP_IDS.split(',') : [];
+const liveQueryArray = process.env.LIVE_QUERIES ? process.env.LIVE_QUERIES.split('|') : [];
+const dashboardArray: unknown[] = [];
 
 // Parse Server
 parseArray.forEach(appId => {
@@ -19,8 +19,8 @@ parseArray.forEach(appId => {
     });
 
     // Live Query configuration
-    let liveQueryClasses = liveQueryArray.reduce((res, value) => {
-        let prefix = `${appId}:`;
+    const liveQueryClasses = liveQueryArray.reduce((res, value) => {
+        const prefix = `${appId}:`;
         if(value.startsWith(prefix)) res = res.concat(value.replace(prefix, '').split(','));
         return res;
     }, []);
@@ -45,7 +45,7 @@ parseArray.forEach(appId => {
 });
 
 // Parse Dashboard
-let dashboard = new ParseDashboard({
+const dashboard = new ParseDashboard({
     'apps': dashboardArray,
     'users': [{
         'user': process.env.DASHBOARD_USERNAME,
@@ -60,5 +60,5 @@ app.use('/dashboard/', dashboard);
 // Parse Server plays nicely with the rest of your web routes
 app.get('/', (req, res) => res.status(200).send('Welcome to the Parse Server'));
 
-let port = process.env.PORT || 1337;
+const port = process.env.PORT || 1337;
 app.listen(port, () => console.log(`Parse Server is running on port ${port}.`));

@@ -1,0 +1,41 @@
+{
+    "name": "parse-server",
+    "version": "1.0.0",
+    "license": "Apache-2.0",
+    "main": "src/index.ts",
+    "dependencies": {
+        "@types/express": "latest",
+        "express": "latest",
+        "parse-server": "latest",
+        "parse-dashboard": "latest"
+    },
+    "devDependencies": {
+        "@types/copy-webpack-plugin": "latest",
+        "@types/jest": "latest",
+        "@types/node": "latest",
+        "@types/parse": "latest",
+        "@types/webpack": "latest",
+        "@types/webpack-node-externals": "latest",
+        "@typescript-eslint/eslint-plugin": "latest",
+        "@typescript-eslint/parser": "latest",
+        "axios": "latest",
+        "copy-webpack-plugin": "latest",
+        "eslint": "latest",
+        "jest": "latest",
+        "moment": "latest",
+        "parse": "latest",
+        "ts-jest": "latest",
+        "ts-loader": "latest",
+        "ts-node": "latest",
+        "typescript": "latest",
+        "webpack": "latest",
+        "webpack-cli": "latest",
+        "webpack-node-externals": "latest"
+    },
+    "scripts": {
+        "build": "webpack",
+        "lint": "eslint src --ext .ts",
+        "start": "ts-node src/index.ts",
+        "test": "jest"
+    }
+}

@@ -4,6 +4,7 @@
 
 # User-specific stuff:
 .idea/
+build/
 
 ## File-based project format:
 *.iws

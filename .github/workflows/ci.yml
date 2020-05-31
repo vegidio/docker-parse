@@ -17,7 +17,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
+          node-version: '14.x'
 
       - name: Checkout the code
         uses: actions/checkout@v2
@@ -27,19 +27,23 @@ jobs:
         run: |
           echo "::set-output name=date::$(date +'%y.%-m').$GITHUB_RUN_NUMBER"
 
+      - name: Compile the binaries
+        run: |
+          yarn
+          yarn build
+
       - name: Build and run the Docker image
         run: |
           docker build -t $IMAGE_NAME .
           docker tag $IMAGE_NAME:latest $IMAGE_NAME:${{ steps.calver.outputs.date }}
-          docker-compose up -d
 
       - name: Test the build
         run: |
+          docker-compose up -d
           sleep 10
-          yarn --cwd $GITHUB_WORKSPACE/test
-          yarn --cwd $GITHUB_WORKSPACE/test test
+          yarn test
 
-      - name: Creating release
+      - name: Create release
         id: create_release
         uses: actions/create-release@v1
         env:

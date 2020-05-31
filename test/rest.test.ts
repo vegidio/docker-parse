@@ -1,6 +1,7 @@
-const axios = require('axios');
+import axios from 'axios';
+import * as moment from 'moment';
 
-let client = axios.create({
+const client = axios.create({
     baseURL: 'http://localhost:1337/app/app2/',
     headers: {
         'X-Parse-Application-Id': 'app2',
@@ -16,14 +17,14 @@ beforeAll(() => {
 describe('Test the REST API', () =>
 {
     test('Create Parse object', () => {
-        let body = {
+        const body = {
             'name': 'Indiana Jones',
-            'releaseDate': new Date(Date.UTC(1981, 5, 12)),
+            'releaseDate': moment.utc([1981, 5, 12]).toDate(),
             'rating': 8.5
         };
 
         return client.post('classes/Movie', body)
-            .then((res) => {
+            .then(res => {
                 expect(res.status).toBe(201);
                 expect(res.data).toHaveProperty('objectId');
                 expect(res.data).toHaveProperty('createdAt');
@@ -32,8 +33,8 @@ describe('Test the REST API', () =>
 
     test('Query Parse object', () => {
         return client.get('classes/Movie')
-            .then((res) => {
-                let obj = res.data.results[0];
+            .then(res => {
+                const obj = res.data.results[0];
                 expect(res.status).toBe(200);
                 expect(obj.name).toBe('Indiana Jones');
                 expect(obj.rating).toBe(8.5);

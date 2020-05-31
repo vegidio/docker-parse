@@ -1,13 +1,14 @@
-module.exports =
-{
-    buildConnectionUrl: (env, appId) =>
+import ProcessEnv = NodeJS.ProcessEnv;
+
+export default {
+    buildConnectionUrl: (env: ProcessEnv, appId: string): string =>
     {
         let url = env.DB_HOST;
 
         // Add username & password
         if (typeof env.DB_USERNAME !== 'undefined' && typeof env.DB_PASSWORD !== 'undefined') {
-            let creds = env.DB_USERNAME + ':' + env.DB_PASSWORD + '@';
-            let pos = url.indexOf('://') + 3;
+            const creds = env.DB_USERNAME + ':' + env.DB_PASSWORD + '@';
+            const pos = url.indexOf('://') + 3;
             url = url.substring(0, pos) + creds + url.substring(pos);
         }
 
@@ -16,4 +17,4 @@ module.exports =
 
         return url;
     }
-};
+}
