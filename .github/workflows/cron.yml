@@ -20,7 +20,7 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v2
 
-      - name: Setting CalVer
+      - name: Set CalVer
         id: calver
         run: |
           echo "::set-output name=date::$(date +'%y.%-m')"

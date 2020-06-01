@@ -22,7 +22,7 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v2
 
-      - name: Setting CalVer
+      - name: Set CalVer
         id: calver
         run: |
           echo "::set-output name=date::$(date +'%y.%-m').$GITHUB_RUN_NUMBER"
@@ -32,7 +32,7 @@ jobs:
           yarn
           yarn build
 
-      - name: Build and run the Docker image
+      - name: Build the Docker image
         run: |
           docker build -t $IMAGE_NAME .
           docker tag $IMAGE_NAME:latest $IMAGE_NAME:${{ steps.calver.outputs.date }}
