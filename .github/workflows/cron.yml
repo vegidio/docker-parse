@@ -26,9 +26,7 @@ jobs:
           echo "::set-output name=date::$(date +'%y.%-m')"
 
       - name: Compile the binaries
-        run: |
-          yarn
-          yarn build
+        run: yarn build
 
       - name: Build the Docker image
         run: |

@@ -33,9 +33,9 @@
         "webpack-node-externals": "latest"
     },
     "scripts": {
-        "build": "webpack",
-        "lint": "eslint src --ext .ts",
-        "start": "ts-node src/index.ts",
-        "test": "jest"
+        "build": "yarn && webpack",
+        "lint": "yarn && eslint src --ext .ts",
+        "start": "yarn && ts-node .",
+        "test": "yarn && jest"
     }
 }

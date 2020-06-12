@@ -7,7 +7,7 @@ export default {
 
         // Add username & password
         if (typeof env.DB_USERNAME !== 'undefined' && typeof env.DB_PASSWORD !== 'undefined') {
-            const creds = env.DB_USERNAME + ':' + env.DB_PASSWORD + '@';
+            const creds = encodeURIComponent(env.DB_USERNAME) + ':' + encodeURIComponent(env.DB_PASSWORD) + '@';
             const pos = url.indexOf('://') + 3;
             url = url.substring(0, pos) + creds + url.substring(pos);
         }
