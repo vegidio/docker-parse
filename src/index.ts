@@ -12,6 +12,7 @@ const dashboardArray: unknown[] = [];
 parseArray.forEach(appId => {
     dashboardArray.push({
         'serverURL': `${process.env.SERVER_URL}/app/${appId}`,
+        'publicServerURL': process.env.SERVER_URL,
         'graphQLServerURL': `${process.env.SERVER_URL}/app/${appId}/graphql`,
         'masterKey': process.env.MASTER_KEY,
         'appId': appId,
