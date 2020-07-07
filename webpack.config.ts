@@ -1,15 +1,19 @@
-import * as path from 'path';
-import * as webpack from 'webpack';
-import * as nodeExternals from 'webpack-node-externals';
-import * as CopyPlugin from 'copy-webpack-plugin';
+import * as path from 'path'
+import * as webpack from 'webpack'
+import * as nodeExternals from 'webpack-node-externals'
+import * as CopyPlugin from 'copy-webpack-plugin'
 
 const config: webpack.Configuration = {
     target: 'node',
     mode: 'production',
-    entry: './src/index.ts',
+    entry: {
+        parse: './src/parse.ts',
+        dashboard: './src/dashboard.ts',
+    },
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: './server.js'
+        libraryTarget: 'umd',
+        filename: './[name].js'
     },
     resolve: {
         extensions: ['.ts', '.js']
@@ -29,6 +33,6 @@ const config: webpack.Configuration = {
             ]
         })
     ]
-};
+}
 
-export default config;
+export default config

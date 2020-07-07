@@ -1,10 +1,12 @@
 # vegidio/parse
 
-[![Actions](https://github.com/vegidio/docker-parse/workflows/build/badge.svg)](https://github.com/vegidio/docker-parse/actions)
+[![GitHub Actions](https://img.shields.io/github/workflow/status/vegidio-docker/parse/build)](https://github.com/vegidio-docker/parse/actions)
 [![Docker Pulls](https://img.shields.io/docker/pulls/vegidio/parse.svg)](https://hub.docker.com/r/vegidio/parse)
-[![Apache 2.0](https://img.shields.io/badge/license-Apache_License_2.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
+[![ISC License](https://img.shields.io/npm/l/vimdb?color=important)](LICENSE.txt)
 
-A Docker image for the Parse Server with Dashboard pre-installed. It's based on [Express](https://expressjs.com) and supports single and multiple applications per instance.
+A Docker image for the Parse Server with Dashboard pre-installed and a new feature to delete orphan files when a document associated with them is removed from the database.
+
+It's based on [Express](https://expressjs.com) and supports single and multiple applications per instance.
 
 ## 🤖 Usage
 
@@ -16,16 +18,17 @@ Run the container using the image **vegidio/parse**:
 
 ```
 $ docker run -d \
-    -e DB_USERNAME=root \
-    -e DB_PASSWORD=root \
+    -e SERVER_URL=http://server_host \
+    -e MASTER_KEY=12345678 \
     -e DB_HOST=mongodb://database_host:27017 \
-    -e SERVER_URL=http://server_host:1337 \
-    -e MASTER_KEY=d2d58468 \
-    -e APP_IDS=app1 \
+    -e DB_USERNAME=db_username \
+    -e DB_PASSWORD=db_password \
+    -e APP_IDS=app1,app2 \
     -e LIVE_QUERIES='app1:Movie,Actor|app2:Post' \
-    -e DASHBOARD_USERNAME=username \
-    -e DASHBOARD_PASSWORD=password \
-    -p 1337:1337 \
+    -e DELETE_ORPHANS='app1:Review|app2:Comment' \
+    -e DASHBOARD_USERNAME=dashboard_username \
+    -e DASHBOARD_PASSWORD=dashboard_password \
+    -p 80:80 \
     --name parse vegidio/parse
 ```
 
@@ -82,7 +85,7 @@ If your database requires authentication then you need to set the parameters bel
 
 ## 📝 License
 
-**vegidio/parse** is released under the Apache License. See [LICENSE](LICENSE.txt) for details.
+**vegidio/parse** is released under the ISC License. See [LICENSE](LICENSE.txt) for details.
 
 ## 👨🏾‍💻 Author
 

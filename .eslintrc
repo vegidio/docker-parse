@@ -14,5 +14,9 @@
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended"
     ],
-    "rules": {}
+    "rules": {
+        "no-console": "error",
+        "quotes": ["error", "single", { "avoidEscape": true }],
+        "semi": ["error", "never"]
+    }
 }

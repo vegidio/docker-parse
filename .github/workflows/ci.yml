@@ -28,11 +28,13 @@ jobs:
           echo "::set-output name=date::$(date +'%y.%-m').$GITHUB_RUN_NUMBER"
 
       - name: Compile the binaries
-        run: yarn build
+        run: |
+          yarn
+          yarn build
 
       - name: Build the Docker image
         run: |
-          docker build -t $IMAGE_NAME .
+          docker build -t $IMAGE_NAME --build-arg VERSION=${{ steps.calver.outputs.date }} .
           docker tag $IMAGE_NAME:latest $IMAGE_NAME:${{ steps.calver.outputs.date }}
 
       - name: Test the build

@@ -1,13 +1,16 @@
 {
     "name": "parse-server",
-    "version": "1.0.0",
-    "license": "Apache-2.0",
-    "main": "src/index.ts",
+    "version": "2.0.0",
+    "license": "ISC",
+    "main": "server.js",
     "dependencies": {
         "@types/express": "latest",
+        "@types/http-proxy-middleware": "latest",
         "express": "latest",
+        "http-proxy-middleware": "latest",
+        "parse-dashboard": "latest",
         "parse-server": "latest",
-        "parse-dashboard": "latest"
+        "winston": "latest"
     },
     "devDependencies": {
         "@types/copy-webpack-plugin": "latest",
@@ -33,9 +36,11 @@
         "webpack-node-externals": "latest"
     },
     "scripts": {
-        "build": "yarn && webpack",
-        "lint": "yarn && eslint src --ext .ts",
-        "start": "yarn && ts-node .",
-        "test": "yarn && jest"
+        "build": "webpack",
+        "dev": "TS_NODE_FILES=true node --require ts-node/register --trace-warnings src/parse.ts",
+        "lint": "eslint src --ext .ts",
+        "start-parse": "node parse.js",
+        "start-dashboard": "node dashboard.js",
+        "test": "jest"
     }
 }

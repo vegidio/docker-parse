@@ -1,9 +1,11 @@
-FROM node:alpine
+FROM vegidio/nodejs
 LABEL maintainer="Vinicius Egidio <me@vinicius.io>"
 
-# Pulling dependencies
-ADD build /usr/local/parse
-WORKDIR /usr/local/parse
-RUN yarn --production
+ARG VERSION
+ENV IMAGE_VERSION=$VERSION
 
-CMD node server.js
+# Pulling dependencies
+ADD apps.config.js /var/www/apps.config.js
+ADD build /var/www/parse
+WORKDIR /var/www/parse
+RUN yarn --production

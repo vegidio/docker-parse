@@ -1,0 +1,18 @@
+<component name="ProjectRunConfigurationManager">
+    <configuration default="false" name="Run Parse" type="NodeJSConfigurationType"
+                   node-parameters="--require ts-node/register --trace-warnings" path-to-js-file="src/parse.ts"
+                   working-dir="$PROJECT_DIR$">
+        <envs>
+            <env name="TS_NODE_FILES" value="true"/>
+            <env name="NODE_PORT" value="9001"/>
+            <env name="SERVER_URL" value="http://localhost"/>
+            <env name="MASTER_KEY" value="12345678"/>
+            <env name="APP_ID" value="app1"/>
+            <env name="DB_HOST" value="mongodb://db_host:27017"/>
+            <env name="DB_USERNAME" value="db_username"/>
+            <env name="DB_PASSWORD" value="db_password"/>
+            <env name="DELETE_ORPHANS" value="Movie"/>
+        </envs>
+        <method v="2"/>
+    </configuration>
+</component>
