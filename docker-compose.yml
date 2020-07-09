@@ -4,13 +4,14 @@ services:
   parse:
     image: vegidio/parse
     environment:
-      - DB_HOST=mongodb://mongo:27017
-      - DB_USERNAME=root
-      - DB_PASSWORD=password
+      - SERVER_URL=http://localhost
       - MASTER_KEY=123456
       - APP_IDS=app1,app2
-      - LIVE_QUERIES='app1:Movie|app2:Actor'
-      - SERVER_URL=http://localhost
+      - DB_HOST=mongodb://mongo:27017
+      - DB_USERNAME=username
+      - DB_PASSWORD=password
+      - LIVE_QUERIES=app1:Movie|app2:Actor
+      - DELETE_ORPHANS=app1:Movie|app2:Actor
       - DASHBOARD_USERNAME=username
       - DASHBOARD_PASSWORD=password
     ports:
@@ -19,7 +20,7 @@ services:
   mongo:
     image: mongo
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_USERNAME=username
       - MONGO_INITDB_ROOT_PASSWORD=password
     ports:
       - 27017:27017

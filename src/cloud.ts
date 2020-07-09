@@ -70,7 +70,7 @@ class Cloud
     {
         Parse.Cloud.httpRequest({
             method: 'DELETE',
-            url: `${process.env.SERVER_URL}:${process.env.NODE_PORT}/files/${filename}`,
+            url: `http://0.0.0.0:${process.env.NODE_PORT}/files/${filename}`,
             headers: {'X-Parse-Master-Key': Parse.masterKey, 'X-Parse-Application-Id': Parse.applicationId}
         })
     }

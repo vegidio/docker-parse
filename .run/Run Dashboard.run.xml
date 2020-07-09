@@ -6,11 +6,9 @@
             <env name="TS_NODE_FILES" value="true"/>
             <env name="SERVER_URL" value="http://localhost"/>
             <env name="MASTER_KEY" value="12345678"/>
-            <env name="APP_IDS" value="app1,app2"/>
+            <env name="APP_IDS" value="app1"/>
             <env name="DASHBOARD_USERNAME" value="username"/>
             <env name="DASHBOARD_PASSWORD" value="password"/>
-            <env name="LIVE_QUERIES" value="app1:Movie"/>
-            <env name="DELETE_ORPHANS" value="app1:Movie"/>
         </envs>
         <method v="2"/>
     </configuration>

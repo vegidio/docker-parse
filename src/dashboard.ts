@@ -18,13 +18,13 @@ parseArray.forEach(appId => {
         appId: appId,
         appName: appId,
         serverURL: `${process.env.SERVER_URL}/app/${appId}`,
-        graphQLServerURL: `${process.env.SERVER_URL}/app/${appId}/graphql`,
+        graphQLServerURL: `http://${process.env.SERVER_URL}/app/${appId}/graphql`,
         masterKey: process.env.MASTER_KEY,
     })
 
     // Create friendly path to the app, without the port
     app.use(`/app/${appId}`, createProxyMiddleware({
-        target: `${process.env.SERVER_URL}:${appPort}`,
+        target: `http://0.0.0.0:${appPort}`,
         changeOrigin: true,
         pathRewrite: { [`^/app/${appId}`]: '' }
     }))
@@ -44,4 +44,4 @@ app.use('/dashboard', dashboard)
 app.get('/', (req, res) => res.status(200).send(`Welcome to the Parse Server, v${process.env.IMAGE_VERSION}`))
 
 // Starting server
-app.listen(80, () => logger.info('🤖 Parse Dashboard is running...'))
+app.listen(80, () => logger.info('🤖 Parse Dashboard is running…'))

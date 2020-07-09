@@ -4,7 +4,7 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/vegidio/parse.svg)](https://hub.docker.com/r/vegidio/parse)
 [![ISC License](https://img.shields.io/npm/l/vimdb?color=important)](LICENSE.txt)
 
-A Docker image for the Parse Server with Dashboard pre-installed and a new feature to delete orphan files when a document associated with them is removed from the database.
+A Docker image for the [Parse Server](https://parseplatform.org/) with Dashboard pre-installed and a new feature to delete orphan files when a document associated with them is removed from the database.
 
 It's based on [Express](https://expressjs.com) and supports single and multiple applications per instance.
 
@@ -18,12 +18,12 @@ Run the container using the image **vegidio/parse**:
 
 ```
 $ docker run -d \
-    -e SERVER_URL=http://server_host \
+    -e SERVER_URL=http://hostname \
     -e MASTER_KEY=12345678 \
+    -e APP_IDS=app1,app2 \
     -e DB_HOST=mongodb://database_host:27017 \
     -e DB_USERNAME=db_username \
     -e DB_PASSWORD=db_password \
-    -e APP_IDS=app1,app2 \
     -e LIVE_QUERIES='app1:Movie,Actor|app2:Post' \
     -e DELETE_ORPHANS='app1:Review|app2:Comment' \
     -e DASHBOARD_USERNAME=dashboard_username \
@@ -58,21 +58,25 @@ For example, the environment variable `-e LIVE_QUERIES='app1:Movie,Actor|app2:Po
 
 ### URLs
 
-* __Apps:__ each app in the Parse Server can be accessed through the URL [hostname:1337/app/`app_id`]().
-* __GraphQL:__ each app can also be accessed through GraphQL with the URL [hostname:1337/app/`app_id`/graphql]().
-* __Dashboard:__ The Parse Dashboard can be accessed through the URL [hostname:1337/dashboard]().
+* __Apps:__ each app in the Parse Server can be accessed through the URL [hostname/app/`app_id`]().
+* __GraphQL:__ each app can also be accessed through GraphQL with the URL [hostname/app/`app_id`/graphql]().
+* __Dashboard:__ The Parse Dashboard can be accessed through the URL [hostname/dashboard]().
 
 ## 🧩 Parameters
 
 Here is the full list of parameters used by the Parse Server:
 
-### Optional
+### Database Authentication
 
 If your database requires authentication then you need to set the parameters below when you run the Parse Server, otherwise they can be ignored:
 
 - `DB_USERNAME`: the username used to login in the database. This user must have access to create new schemas.
 - `DB_PASSWORD`: the password used to login in the database.
+
+### Optional
+
 - `LIVE_QUERIES`: please see [Live Query](#live-query) above.
+- `DELETE_ORPHANS`: TBD
 
 ### Mandatory
 
