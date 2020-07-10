@@ -1,6 +1,5 @@
 import * as express from 'express'
 import ParseServer, { ParseGraphQLServer } from 'parse-server'
-import db from './database'
 import cloud from './cloud'
 import logger from './logger'
 
@@ -15,7 +14,7 @@ const parseServer = new ParseServer({
     appId: appId,
     serverURL: `http://0.0.0.0:${port}`,
     publicServerURL: `${process.env.SERVER_URL}/app/${appId}`,
-    databaseURI: db.buildConnectionUrl(process.env),
+    databaseURI: `${process.env.DB_URL}/parse_${appId}?authSource=admin`,
     masterKey: process.env.MASTER_KEY,
     liveQuery: { classNames: liveQueryArray }
 })

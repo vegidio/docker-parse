@@ -7,9 +7,7 @@ services:
       - SERVER_URL=http://localhost
       - MASTER_KEY=123456
       - APP_IDS=app1,app2
-      - DB_HOST=mongodb://mongo:27017
-      - DB_USERNAME=username
-      - DB_PASSWORD=password
+      - DB_URL=mongodb://username:password@mongo:27017
       - LIVE_QUERIES=app1:Movie|app2:Actor
       - DELETE_ORPHANS=app1:Movie|app2:Actor
       - DASHBOARD_USERNAME=username

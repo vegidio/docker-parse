@@ -46,13 +46,11 @@ parseArray.forEach(appId => {
         cwd: '/var/www/parse',
         exec_mode: 'cluster',
         env: {
-            APP_ID: appId,
             NODE_PORT: port,
             SERVER_URL: process.env.SERVER_URL,
+            DB_URL: process.env.DB_URL,
             MASTER_KEY: process.env.MASTER_KEY,
-            DB_HOST: process.env.DB_HOST,
-            DB_USERNAME: process.env.DB_USERNAME,
-            DB_PASSWORD: process.env.DB_PASSWORD,
+            APP_ID: appId,
             LIVE_QUERIES: liveQueryClasses,
             DELETE_ORPHANS: deleteOrphanClasses
         }

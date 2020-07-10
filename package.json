@@ -8,6 +8,7 @@
         "@types/http-proxy-middleware": "latest",
         "express": "latest",
         "http-proxy-middleware": "latest",
+        "jdenticon": "latest",
         "parse-dashboard": "latest",
         "parse-server": "latest",
         "winston": "latest"
