@@ -34,8 +34,9 @@ parseArray.forEach(appId => {
     // Create friendly path to the app, without the port
     app.use(`/app/${appId}`, createProxyMiddleware({
         target: `http://0.0.0.0:${appPort}`,
+        pathRewrite: { [`^/app/${appId}`]: '' },
         changeOrigin: true,
-        pathRewrite: { [`^/app/${appId}`]: '' }
+        logLevel: 'silent'
     }))
 })
 

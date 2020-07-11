@@ -32,5 +32,5 @@ cloud.init(deleteOrphans)
 
 // Starting server
 app.listen(port, () => {
-    logger.info('🤖 Parse Server -%s- is running in path /app/%s', appId, appId)
+    logger.info('🤖 Parse Server -%s- is running on port %d, path http://localhost/app/%s', appId, port, appId)
 })
