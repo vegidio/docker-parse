@@ -24,6 +24,13 @@ const parseGraphQLServer = new ParseGraphQLServer(parseServer, {
     graphQLPath: '/graphql'
 })
 
+// Set the Cache-Control header for files
+app.use((req, res, next) => {
+    const maxAge = process.env.CACHE_MAX_AGE || 2_592_000
+    if (req.url.startsWith('/files/')) res.setHeader('Cache-Control', `max-age=${maxAge}`)
+    next()
+})
+
 app.use('/', parseServer.app)
 parseGraphQLServer.applyGraphQL(app)
 
