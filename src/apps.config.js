@@ -1,8 +1,7 @@
-const parseArray = process.env.APP_IDS ? process.env.APP_IDS.split(',') : []
-const liveQueryArray = process.env.LIVE_QUERIES ? process.env.LIVE_QUERIES.split('|') : []
-const deleteOrphanArray = process.env.DELETE_ORPHANS ? process.env.DELETE_ORPHANS.split('|') : []
-
-const apps = []
+const parseArray = process.env.APP_IDS ? process.env.APP_IDS.split(',') : [];
+const liveQueryArray = process.env.LIVE_QUERIES ? process.env.LIVE_QUERIES.split('|') : [];
+const deleteOrphanArray = process.env.DELETE_ORPHANS ? process.env.DELETE_ORPHANS.split('|') : [];
+const apps = [];
 
 // Add the Parse Dashboard
 apps.push({
@@ -14,31 +13,31 @@ apps.push({
         IMAGE_VERSION: process.env.IMAGE_VERSION,
         APP_IDS: process.env.APP_IDS,
         SERVER_URL: process.env.SERVER_URL,
-        MASTER_KEY: process.env.MASTER_KEY
-    }
-})
+        MASTER_KEY: process.env.MASTER_KEY,
+    },
+});
 
 // Initial port number
-let port = 9000
+let port = 9000;
 
 // Add the Parse Apps
-parseArray.forEach(appId => {
+parseArray.forEach((appId) => {
     // Calculate the port each app
-    port += 1
+    port += 1;
 
     // Live Query configuration
     const liveQueryClasses = liveQueryArray.reduce((res, value) => {
-        const prefix = `${appId}:`
-        if(value.startsWith(prefix)) res = value.replace(prefix, '')
-        return res
-    }, '')
+        const prefix = `${appId}:`;
+        if (value.startsWith(prefix)) res = value.replace(prefix, '');
+        return res;
+    }, '');
 
     // Delete Orphan configuration
     const deleteOrphanClasses = deleteOrphanArray.reduce((res, value) => {
-        const prefix = `${appId}:`
-        if(value.startsWith(prefix)) res = value.replace(prefix, '')
-        return res
-    }, '')
+        const prefix = `${appId}:`;
+        if (value.startsWith(prefix)) res = value.replace(prefix, '');
+        return res;
+    }, '');
 
     apps.push({
         name: appId,
@@ -52,9 +51,9 @@ parseArray.forEach(appId => {
             MASTER_KEY: process.env.MASTER_KEY,
             APP_ID: appId,
             LIVE_QUERIES: liveQueryClasses,
-            DELETE_ORPHANS: deleteOrphanClasses
-        }
-    })
-})
+            DELETE_ORPHANS: deleteOrphanClasses,
+        },
+    });
+});
 
-module.exports = { apps: apps }
+module.exports = { apps: apps };

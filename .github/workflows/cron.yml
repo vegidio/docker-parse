@@ -20,6 +20,17 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v2
 
+      - name: Upgrade the packages
+        run: |
+          npm install -g npm-check-updates
+          if ! ncu -u -e 2; then
+            git config --global user.name "Vinícius Egidio"
+            git config --global user.email "me@vinicius.io"
+            git add package.json
+            git commit -m "⬆️ Upgraded NPM packages [skip-ci]"
+            git push
+          fi
+
       - name: Set CalVer
         id: calver
         run: |

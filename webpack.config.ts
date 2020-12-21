@@ -1,7 +1,7 @@
-import * as path from 'path'
-import * as webpack from 'webpack'
-import * as nodeExternals from 'webpack-node-externals'
-import * as CopyPlugin from 'copy-webpack-plugin'
+import * as path from 'path';
+import * as webpack from 'webpack';
+import * as nodeExternals from 'webpack-node-externals';
+import * as CopyPlugin from 'copy-webpack-plugin';
 
 const config: webpack.Configuration = {
     target: 'node',
@@ -13,26 +13,20 @@ const config: webpack.Configuration = {
     output: {
         path: path.resolve(__dirname, 'build'),
         libraryTarget: 'umd',
-        filename: './[name].js'
+        filename: './[name].js',
     },
     resolve: {
-        extensions: ['.ts', '.js']
+        extensions: ['.ts', '.js'],
     },
     module: {
-        rules: [
-            { test: /\.ts$/, loaders: 'ts-loader' }
-        ]
+        rules: [{ test: /\.ts$/, loader: 'ts-loader' }],
     },
-    externals: [
-        nodeExternals()
-    ],
+    externals: [nodeExternals()],
     plugins: [
         new CopyPlugin({
-            patterns: [
-                { from: 'package.json', to: '.' }
-            ]
-        })
-    ]
-}
+            patterns: [{ from: 'package.json', to: '.' }],
+        }),
+    ],
+};
 
-export default config
+export default config;
