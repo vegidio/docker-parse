@@ -7,7 +7,7 @@ const apps = [];
 apps.push({
     name: 'dashboard',
     script: 'dashboard.js',
-    cwd: '/var/www/parse',
+    cwd: '/var/www',
     exec_mode: 'cluster',
     env: {
         IMAGE_VERSION: process.env.IMAGE_VERSION,
@@ -42,7 +42,7 @@ parseArray.forEach((appId) => {
     apps.push({
         name: appId,
         script: 'parse.js',
-        cwd: '/var/www/parse',
+        cwd: '/var/www',
         exec_mode: 'cluster',
         env: {
             NODE_PORT: port,
